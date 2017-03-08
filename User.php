@@ -22,6 +22,8 @@ class User
 
     public function hasPrivilege($privilege)
     {
-        return collect(data_get($this, 'relations.user_groups.*.privileges.*'))->search($privilege) !== false;
+        $privileges = data_get($this, 'relations.user_groups.*.privileges.*');
+
+        return collect($privileges)->search($privilege) !== false;
     }
 }
