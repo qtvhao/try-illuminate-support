@@ -1,0 +1,12 @@
+{
+  "name": "qtvhao/try-illuminate-support",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "haonx",
+      "email": "qtvhao@gmail.com"
+    }
+  ]
+}
