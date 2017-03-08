@@ -8,5 +8,8 @@
       "name": "haonx",
       "email": "qtvhao@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "illuminate/support": "v5.4.13"
+  }
 }
