@@ -19,4 +19,9 @@ class User
             'delete'
         ]);
     }
+
+    public function hasPrivilege($privilege)
+    {
+        return collect(data_get($this, 'relations.user_groups.*.privileges.*'))->search($privilege) !== false;
+    }
 }
