@@ -17,3 +17,13 @@ for ($i = 0; $i < 10; $i++) {
 #END SEEDING
 
 echo $all_items;
+#return self
+$items = $all_items
+    ->except(2, 3)
+    ->except([1, 2])
+    ->only(0, 5, 6)
+    ->pluck('relations.user_groups.*.privileges.*')
+    ->flatten()
+    ->unique()
+;
+print_r($items->toArray());
