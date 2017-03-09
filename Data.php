@@ -8,31 +8,31 @@
  */
 class Data
 {
-    public $data;
+    public $target;
 
     public function make($data)
     {
         return new static($data);
     }
 
-    public function __construct($data)
+    public function __construct($target)
     {
-        $this->data = $data;
+        $this->target = $target;
     }
 
     public function get($key, $default = null)
     {
-        return data_get($this->data, $key, $default);
+        return data_get($this->target, $key, $default);
     }
 
     public function set($key, $value)
     {
-        return data_set($this->data,$key,$value);
+        return data_set($this->target,$key,$value);
     }
 
     public function fill($key, $value)
     {
-        return data_set($this->data,$key,$value);
+        return data_set($this->target,$key,$value);
     }
 
     public function collect($key, $default = [])
