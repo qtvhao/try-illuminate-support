@@ -35,7 +35,7 @@ class Data
 
     public function fill($key, $value)
     {
-        return data_set($this->target,$key,$value);
+        return data_fill($this->target,$key,$value);
     }
 
     public function collect($key, $default = [])
