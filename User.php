@@ -6,7 +6,7 @@
  * Date: 3/9/2017
  * Time: 12:09 AM
  */
-class User
+class User implements \Illuminate\Contracts\Support\Arrayable
 {
     public $relations;
 
@@ -25,5 +25,15 @@ class User
         $privileges = data_get($this, 'relations.user_groups.*.privileges.*');
 
         return collect($privileges)->search($privilege) !== false;
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return (array)$this;
     }
 }
