@@ -8,6 +8,9 @@
  */
 class Data
 {
+    /**
+     * @var mixed
+     */
     public $target;
 
     public function make($data)
