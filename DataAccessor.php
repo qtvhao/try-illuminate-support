@@ -6,14 +6,14 @@
  * Date: 3/9/2017
  * Time: 7:56 PM
  */
-class Data
+class DataAccessor
 {
     /**
      * @var mixed
      */
     public $target;
 
-    public function make($data)
+    public static function make($data)
     {
         return new static($data);
     }
