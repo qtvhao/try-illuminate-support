@@ -17,7 +17,7 @@ for ($i = 0; $i < 10; $i++) {
 }
 #END SEEDING
 
-function data($data = [])
+function data(&$data = [])
 {
     return new DataAccessor($data);
 }
