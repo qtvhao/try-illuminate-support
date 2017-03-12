@@ -35,3 +35,4 @@ var_export($users->target->toArray());
 #
 var_export($users->get($privilegesPath));
 var_export($users->collect($privilegesPath)->unique());
+var_export($users->get('property_not_exists'), 'default_value');
