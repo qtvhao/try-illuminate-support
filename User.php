@@ -12,12 +12,8 @@ class User implements \Illuminate\Contracts\Support\Arrayable
 
     public function __construct()
     {
-        data_set($this->relations, 'user_groups.0.privileges', [
-            'create',
-            'read',
-            'update',
-            'delete'
-        ]);
+        $default_privileges = ['create', 'read', 'update', 'delete'];
+        data($this->relations)->set('user_groups.0.privileges', $default_privileges);
     }
 
     public function hasPrivilege($privilege)
