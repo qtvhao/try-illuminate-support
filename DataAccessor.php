@@ -13,14 +13,14 @@ class DataAccessor
      */
     public $target;
 
-    public static function make($data)
+    public static function make(&$data)
     {
         return new static($data);
     }
 
-    public function __construct($target)
+    public function __construct(&$target)
     {
-        $this->target = $target;
+        $this->target = &$target;
     }
 
     public function get($key, $default = null)
