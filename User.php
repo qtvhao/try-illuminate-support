@@ -12,7 +12,7 @@ class User implements \Illuminate\Contracts\Support\Arrayable
 
     public function __construct()
     {
-        data_set($this, 'relations.user_groups.0.privileges', [
+        data_set($this->relations, 'user_groups.0.privileges', [
             'create',
             'read',
             'update',
@@ -22,9 +22,9 @@ class User implements \Illuminate\Contracts\Support\Arrayable
 
     public function hasPrivilege($privilege)
     {
-        $privileges = data_get($this, 'relations.user_groups.*.privileges.*');
+        $privileges = data($this->relations)->collect('user_groups.*.privileges.*');
 
-        return collect($privileges)->search($privilege) !== false;
+        return $privileges->contains($privilege);
     }
 
     /**
