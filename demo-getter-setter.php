@@ -26,9 +26,11 @@ $user = data(new User());
 dd($user->get('display_name'));
 #Trả về default_value nếu không tồn tại property
 dd($user->get('property_not_exists', 'default_value'));
-$user->dd();
 # dump & die data
+$user->dd();
+# get data có cấu trúc phức tạp đơn giản hơn
 dd($user->get('relations.user_groups.*.privileges.*'));
+#collection data dạng mảng phức tạp
 dd($user->collect('relations.user_groups.*.privileges.*')->unique()->toArray());
 
 #DEBUG
