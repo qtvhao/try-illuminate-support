@@ -6,7 +6,7 @@
  * Date: 3/9/2017
  * Time: 12:09 AM
  */
-class User implements \Illuminate\Contracts\Support\Arrayable
+class User implements \Illuminate\Contracts\Support\Arrayable, \Illuminate\Contracts\Support\Jsonable
 {
     public $relations;
     public $display_name;
@@ -34,5 +34,16 @@ class User implements \Illuminate\Contracts\Support\Arrayable
     public function toArray()
     {
         return (array)$this;
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this, $options);
     }
 }
