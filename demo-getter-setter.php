@@ -1,4 +1,4 @@
-<?php
+<pre><?php
 /**
  * Created by PhpStorm.
  * User: qtvha
@@ -6,33 +6,30 @@
  * Time: 12:01 AM
  */
 use Illuminate\Support\Collection;
-
+function dd($data){
+    echo json_encode($data, JSON_PRETTY_PRINT);
+    die;
+}
 require_once 'vendor/autoload.php';
 require_once 'User.php';
 require_once 'DataAccessor.php';
-#BEGIN SEEDING
-$all_users = Collection::make();
-for ($i = 0; $i < 10; $i++) {
-    $all_users->push(new User());
-}
-#END SEEDING
 
 function data(&$data = [])
 {
     return new DataAccessor($data);
 }
-
-$privilegesPath = '*.relations.user_groups.*.privileges.*';
-$users = data($all_users);
-$users->set('*.relations.sites.0.domain', 'g.co');
-$users->fill('*.relations.sites.0.domain', 'g1.co');#not working with data exists
-$users->fill('*.relations.sites.1.domain', 'g1.co');
-var_export($users->target->toArray());
-$users->set('0.relations.user_groups.*.privileges', ['c','r','u','d']);
-var_export($users->target->toArray());
-$users->set('*.relations.user_groups.*.privileges', ['c','r','u','d']);
-var_export($users->target->toArray());
-#
-var_export($users->get($privilegesPath));
-var_export($users->collect($privilegesPath)->unique());
-var_export($users->get('property_not_exists'), 'default_value');
+/** @var DataAccessor $user */
+$user = new User();
+$userAccessor = data($user);
+#GETTER
+dd($userAccessor->get('display_name'));
+dd($userAccessor->get('property_not_exists', 'default_value'));
+$userAccessor->dd();
+dd($userAccessor->get('relations.user_groups.*.privileges.*'));
+dd($userAccessor->collect('relations.user_groups.*.privileges.*')->unique()->toArray());
+#DEBUG
+//$userAccessor->dd('relations.user_groups.*.privileges.*');
+#SETTER
+$userAccessor->set('relations.sites.0.domain', 'g.co');
+$userAccessor->set('relations.user_groups.0.privileges', ['c','r','u','d']);
+$userAccessor->set('relations.user_groups.*.privileges', ['c','r','u','d']);
