@@ -15,6 +15,7 @@ class User implements \Illuminate\Contracts\Support\Arrayable
     {
         $default_privileges = ['create', 'read', 'update', 'delete'];
         data($this)->set('relations.user_groups.0.privileges', $default_privileges);
+        data($this)->set('relations.user_groups.1.privileges', $default_privileges);
         data($this)->set('display_name', 'haonx '.str_random(5));
     }
 
