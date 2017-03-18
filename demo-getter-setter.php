@@ -22,10 +22,12 @@ function data(&$data = [])
 $user = data(new User());
 
 #GETTER
-echo 'Không phân biệt $user là array hay object. Lấy thuộc tính `display_name` của user với $user. Nếu không tồn tại user.display_name trả về null';
+#Lấy $user->display_name hoặc $user[display_name]
 dd($user->get('display_name'));
+#Trả về default_value nếu không tồn tại property
 dd($user->get('property_not_exists', 'default_value'));
 $user->dd();
+# dump & die data
 dd($user->get('relations.user_groups.*.privileges.*'));
 dd($user->collect('relations.user_groups.*.privileges.*')->unique()->toArray());
 
