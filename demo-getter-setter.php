@@ -19,17 +19,20 @@ function data(&$data = [])
     return new DataAccessor($data);
 }
 /** @var DataAccessor $user */
-$user = new User();
-$userAccessor = data($user);
+$user = data(new User());
+
 #GETTER
-dd($userAccessor->get('display_name'));
-dd($userAccessor->get('property_not_exists', 'default_value'));
-$userAccessor->dd();
-dd($userAccessor->get('relations.user_groups.*.privileges.*'));
-dd($userAccessor->collect('relations.user_groups.*.privileges.*')->unique()->toArray());
+echo 'Không phân biệt $user là array hay object. Lấy thuộc tính `display_name` của user với $user. Nếu không tồn tại user.display_name trả về null';
+dd($user->get('display_name'));
+dd($user->get('property_not_exists', 'default_value'));
+$user->dd();
+dd($user->get('relations.user_groups.*.privileges.*'));
+dd($user->collect('relations.user_groups.*.privileges.*')->unique()->toArray());
+
 #DEBUG
 //$userAccessor->dd('relations.user_groups.*.privileges.*');
+
 #SETTER
-$userAccessor->set('relations.sites.0.domain', 'g.co');
-$userAccessor->set('relations.user_groups.0.privileges', ['c','r','u','d']);
-$userAccessor->set('relations.user_groups.*.privileges', ['c','r','u','d']);
+$user->set('relations.sites.0.domain', 'g.co');
+$user->set('relations.user_groups.0.privileges', ['c','r','u','d']);
+$user->set('relations.user_groups.*.privileges', ['c','r','u','d']);
