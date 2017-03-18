@@ -42,4 +42,15 @@ class DataAccessor
     {
         return collect($this->get($key, $default));
     }
+
+    public function dd($key = null)
+    {
+        if(is_null($key)){
+            if($this->target instanceof \Illuminate\Contracts\Support\Arrayable){
+                dd($this->target->toArray());
+            }
+            dd($this->target);
+        }
+        dd($this->get($key));
+    }
 }
