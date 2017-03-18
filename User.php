@@ -9,11 +9,13 @@
 class User implements \Illuminate\Contracts\Support\Arrayable
 {
     public $relations;
+    public $display_name;
 
     public function __construct()
     {
         $default_privileges = ['create', 'read', 'update', 'delete'];
         data($this)->set('relations.user_groups.0.privileges', $default_privileges);
+        data($this)->set('display_name', str_random(5));
     }
 
     public function hasPrivilege($privilege)
