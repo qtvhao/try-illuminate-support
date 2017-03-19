@@ -5,7 +5,9 @@
  * Date: 3/9/2017
  * Time: 12:01 AM
  */
-use Illuminate\Support\Collection;
+/**
+ * @param $data
+ */
 function dd($data){
     echo json_encode($data, JSON_PRETTY_PRINT);
     die;
@@ -22,21 +24,46 @@ function data(&$data = [])
 $user = data(new User());
 
 #GETTER
+
 #Lấy $user->display_name hoặc $user[display_name]
-dd($user->get('display_name'));
+$display_name = $user->get('display_name');
+dd($display_name);
+
 #Trả về default_value nếu không tồn tại property
-dd($user->get('property_not_exists', 'default_value'));
+$username = $user->get('property_not_exists', 'default_value');
+dd($username);
+
 # dump & die data
 $user->dd();
-# get data có cấu trúc phức tạp đơn giản hơn
-dd($user->get('relations.user_groups.*.privileges.*'));
-#collection data dạng mảng phức tạp
-dd($user->collect('relations.user_groups.*.privileges.*')->unique()->toArray());
+
+# get data có cấu trúc phức tạp thì sẽ đơn giản hơn
+# lấy $user.relations.user_groups
+# lấy tất cả privileges trong từng user_groups
+# collapse vào thành 1 mảng duy nhất
+$privileges = $user->get('relations.user_groups.*.privileges.*');
+dd($privileges);
+
+# collect data dạng array từ dữ liệu phức tạp
+$privileges = $user->collect('relations.user_groups.*.privileges.*');
+$is_allow_to_read = $privileges->contains('read');
+dd($is_allow_to_read);
 
 #DEBUG
-//$userAccessor->dd('relations.user_groups.*.privileges.*');
+
+# có thể dump die data ra trước
+# sau đó dễ dàng đổi từ $user->dd() thành $user->get() ngay được
+$user->dd('relations.user_groups.*.privileges.*');
 
 #SETTER
+
+# các element không tồn tại sẽ tự động được tạo mới
 $user->set('relations.sites.0.domain', 'g.co');
+$user->dd();
+
+# set data theo path chính xác
 $user->set('relations.user_groups.0.privileges', ['c','r','u','d']);
+$user->dd();
+
+# set data theo path dạng wild-card
 $user->set('relations.user_groups.*.privileges', ['c','r','u','d']);
+$user->dd();
