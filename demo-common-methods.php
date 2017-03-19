@@ -25,7 +25,7 @@ $items = $all_items
 ;
 
 #GET ITEM
-echo $all_items;
+echo $all_items->__toString();
 print_r($all_items[2]);
 print_r($all_items->all());
 print_r($items->implode(''));
