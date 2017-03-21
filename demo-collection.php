@@ -27,3 +27,4 @@ $items = $all_items
     ->unique()
 ;
 print_r($items->toArray());
+#Thế Collection là gì?

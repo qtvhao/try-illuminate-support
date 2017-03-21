@@ -20,8 +20,7 @@ for ($i = 0; $i < 10; $i++) {
 $items = $all_items
     ->each(function ($item) {/*echo $item;*/
     })
-    // Cú pháp cho các hàm map & filter & reject cũng như vậy
-    ->push(new User())
+    // Cách dùng cho các hàm map & filter & reject cũng như vậy
 ;
 
 #GET ITEM
