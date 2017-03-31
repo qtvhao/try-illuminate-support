@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Collection;
+
 /**
  * Created by PhpStorm.
  * User: haonx
@@ -11,7 +13,7 @@ function data(&$data){
 }
 
 /**
- * @return Users
+ * @return Collection
  */
 function seed_users(){
     $users = collect(range(1, 5))->map(function () {

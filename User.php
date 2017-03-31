@@ -51,4 +51,18 @@ class User implements \Illuminate\Contracts\Support\Arrayable, \Illuminate\Contr
     {
         return json_encode($this, $options);
     }
+
+    public function addToUserGroup()
+    {
+    }
+
+    public function sendEmail($title, $content)
+    {
+
+    }
+
+    public function isVip()
+    {
+
+    }
 }

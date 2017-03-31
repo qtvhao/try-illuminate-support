@@ -7,4 +7,7 @@
  */
 require_once 'vendor/autoload.php';
 #Higher Order Messaging
-dd(seed_users());
+seed_users()->each->addToUserGroup();
+seed_users()->every->sendEmail('title', 'content');
+seed_users()->filter->isVip()->each->sendEmailInvite();
+seed_users()->filter->isPaidUser()->each->sendThankYou();
