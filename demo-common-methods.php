@@ -17,8 +17,10 @@ for ($i = 0; $i < 10; $i++) {
 #END SEEDING
 
 #return self
+/** @var Users $items */
 $items = $all_items
-    ->each(function ($item) {/*echo $item;*/
+    ->each(function (User $item) {/*echo $item;*/
+        echo $item->display_name;
     })
     // Cách dùng cho các hàm map & filter & reject cũng như vậy
 ;

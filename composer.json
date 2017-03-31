@@ -12,5 +12,12 @@
   "require": {
     "illuminate/support": "v5.4.13",
     "symfony/var-dumper": "v3.2.6"
+  },
+  "autoload": {
+    "files": [
+      "DataAccessor.php",
+      "helpers.php",
+      "User.php"
+    ]
   }
 }

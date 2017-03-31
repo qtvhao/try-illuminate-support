@@ -36,6 +36,11 @@ class User implements \Illuminate\Contracts\Support\Arrayable, \Illuminate\Contr
         return (array)$this;
     }
 
+    public function sayHello()
+    {
+        echo "Hi, $this->display_name <br/>";
+    }
+
     /**
      * Convert the object to its JSON representation.
      *
