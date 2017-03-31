@@ -8,17 +8,10 @@
 use Illuminate\Support\Collection;
 
 require_once 'vendor/autoload.php';
-require_once 'User.php';
-#BEGIN SEEDING
-$all_items = Collection::make();
-for ($i = 0; $i < 10; $i++) {
-    $all_items->push(new User());
-}
-$all_items = $all_items->toArray();
-#END SEEDING
+$users = seed_users()->toArray();
 
 //echo json_encode($all_items);
-$items = $all_items;
+$items = $users;
 #except
 unset($items[2]);
 unset($items[3]);
