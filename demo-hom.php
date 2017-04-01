@@ -9,6 +9,9 @@ use Illuminate\Support\Collection;
 
 require_once 'vendor/autoload.php';
 #Higher Order Messaging
+$validators = collect();
+$validators->each->validateOrFail();
+#
 seed_users()->each->addToUserGroup();
 seed_users()->every->sendEmail('title', 'content');
 seed_users()->filter->isVip()->each->sendEmailInvite();
