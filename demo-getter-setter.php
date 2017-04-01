@@ -13,9 +13,9 @@ function dd($data){
     die;
 }
 require_once 'vendor/autoload.php';
+$target = new User();
 /** @var DataAccessor $user */
-$user = data(new User());
-
+$user = data($target);
 #GETTER
 
 #Lấy $user->display_name hoặc $user[display_name]
@@ -35,6 +35,9 @@ $user->dd();
 # collapse vào thành 1 mảng duy nhất
 $privileges = $user->get('relations.user_groups.*.privileges.*');
 dd($privileges);
+
+$defaultVal = data($target)->get('the.very.very.very.long.path.which.not.exists', 'default_value');
+dd($defaultVal);
 
 # collect data dạng array từ dữ liệu phức tạp
 $privileges = $user->collect('relations.user_groups.*.privileges.*');
