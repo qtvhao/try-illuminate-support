@@ -9,14 +9,16 @@ use Illuminate\Support\Collection;
 
 require_once 'vendor/autoload.php';
 #Higher Order Messaging
-$validators = collect();
+$validators = Validators::make();
+$validators->every->isValid(); #true
 $validators->each->validateOrFail();
 #
+/**
+ * @var Posts $posts
+ */
+$titles = $posts->map->title;
+
 seed_users()->each->addToUserGroup();
 seed_users()->every->sendEmail('title', 'content');
 seed_users()->filter->isVip()->each->sendEmailInvite();
 seed_users()->filter->isPaidUser()->each->sendThankYou();
-/**
- * @var Collection $posts
- */
-$titles = $posts->map->title;
