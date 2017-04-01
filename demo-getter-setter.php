@@ -13,13 +13,6 @@ function dd($data){
     die;
 }
 require_once 'vendor/autoload.php';
-require_once 'User.php';
-require_once 'DataAccessor.php';
-
-function data(&$data = [])
-{
-    return new DataAccessor($data);
-}
 /** @var DataAccessor $user */
 $user = data(new User());
 

@@ -8,17 +8,10 @@
 use Illuminate\Support\Collection;
 
 require_once 'vendor/autoload.php';
-require_once 'User.php';
-#BEGIN SEEDING
-$all_items = Collection::make();
-for ($i = 0; $i < 10; $i++) {
-    $all_items->push(new User());
-}
-#END SEEDING
 
+$users = seed_users();
 #return self
-/** @var Users $items */
-$items = $all_items
+$users
     ->each(function (User $item) {/*echo $item;*/
         echo $item->display_name;
     })
@@ -26,12 +19,12 @@ $items = $all_items
 ;
 
 #GET ITEM
-echo $all_items->__toString();
-print_r($all_items[2]);
-print_r($all_items->all());
-print_r($items->implode(''));
+echo $users->__toString();
+print_r($users[2]);
+print_r($users->all());
+print_r($users->implode(''));
 
 #CHECKER
-print_r($all_items->isEmpty());
-print_r($all_items->every(function () {return true;}));
-print_r($all_items->pluck('display_name')->contains('value'));
+print_r($users->isEmpty());
+print_r($users->every(function () {return true;}));
+print_r($users->pluck('display_name')->contains('value'));

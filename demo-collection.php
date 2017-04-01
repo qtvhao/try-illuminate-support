@@ -6,19 +6,11 @@
  * Time: 12:01 AM
  */
 use Illuminate\Support\Collection;
-
 require_once 'vendor/autoload.php';
-require_once 'User.php';
-#BEGIN SEEDING
-$all_items = Collection::make();
-for ($i = 0; $i < 10; $i++) {
-    $all_items->push(new User());
-}
-#END SEEDING
-
-echo $all_items;
+$users = seed_users();
+echo $users;
 #return self
-$items = $all_items
+$items = $users
     ->except(2, 3)
     ->except([1, 2])
     ->only(0, 5, 6)
