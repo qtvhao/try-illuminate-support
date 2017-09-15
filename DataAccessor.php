@@ -33,11 +33,11 @@ class DataAccessor
 			}
 			if ($segments) {
 				foreach ($target as &$inner) {
-					static::data_set($inner, $segments, self::value( $value ), $overwrite);
+					static::data_set($inner, $segments, $value, $overwrite);
 				}
 			} elseif ($overwrite) {
 				foreach ($target as &$inner) {
-					$inner = self::value( $value );
+					$inner = self::value( $value, $inner, $segment );
 				}
 			}
 		} elseif (static::accessible($target)) {
@@ -45,25 +45,25 @@ class DataAccessor
 				if (! static::exists($target, $segment)) {
 					$target[$segment] = [];
 				}
-				static::data_set($target[$segment], $segments, self::value( $value ), $overwrite);
+				static::data_set($target[$segment], $segments, $value, $overwrite);
 			} elseif ($overwrite || ! static::exists($target, $segment)) {
-				$target[$segment] = self::value( $value );
+				$target[$segment] = self::value( $value, $target[$segment], $segment );
 			}
 		} elseif (is_object($target)) {
 			if ($segments) {
 				if (! isset($target->{$segment})) {
 					$target->{$segment} = [];
 				}
-				static::data_set($target->{$segment}, $segments, self::value( $value ), $overwrite);
+				static::data_set($target->{$segment}, $segments, $value, $overwrite);
 			} elseif ($overwrite || ! isset($target->{$segment})) {
-				$target->{$segment} = self::value( $value );
+				$target->{$segment} = self::value( $value, $target->{$segment}, $segment );
 			}
 		} else {
 			$target = [];
 			if ($segments) {
-				static::data_set($target[$segment], $segments, self::value( $value ), $overwrite);
+				static::data_set($target[$segment], $segments, $value, $overwrite);
 			} elseif ($overwrite) {
-				$target[$segment] = self::value( $value );
+				$target[$segment] = self::value( $value, $target->{$segment}, $segment  );
 			}
 		}
 		return $target;
@@ -108,9 +108,19 @@ class DataAccessor
 	}
 
 
-	private static   function value($value)
+	private static function value($value)
 	{
-		return $value instanceof Closure ? $value() : $value;
+		if ( $value instanceof Closure ) {
+			if ( func_num_args() === 2 ) {
+				return $value(func_get_arg( 1 ));
+			} elseif(func_num_args() === 3){
+				return $value( func_get_arg( 1 ), func_get_arg( 2 ));
+			} else {
+				return $value();
+			}
+		} else {
+			return $value;
+		}
 	}
 
 	public function get($key, $default = null)
