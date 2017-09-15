@@ -33,11 +33,11 @@ class DataAccessor
 			}
 			if ($segments) {
 				foreach ($target as &$inner) {
-					static::data_set($inner, $segments, $value, $overwrite);
+					static::data_set($inner, $segments, self::value( $value ), $overwrite);
 				}
 			} elseif ($overwrite) {
 				foreach ($target as &$inner) {
-					$inner = $value;
+					$inner = self::value( $value );
 				}
 			}
 		} elseif (static::accessible($target)) {
@@ -45,25 +45,25 @@ class DataAccessor
 				if (! static::exists($target, $segment)) {
 					$target[$segment] = [];
 				}
-				static::data_set($target[$segment], $segments, $value, $overwrite);
+				static::data_set($target[$segment], $segments, self::value( $value ), $overwrite);
 			} elseif ($overwrite || ! static::exists($target, $segment)) {
-				$target[$segment] = $value;
+				$target[$segment] = self::value( $value );
 			}
 		} elseif (is_object($target)) {
 			if ($segments) {
 				if (! isset($target->{$segment})) {
 					$target->{$segment} = [];
 				}
-				static::data_set($target->{$segment}, $segments, $value, $overwrite);
+				static::data_set($target->{$segment}, $segments, self::value( $value ), $overwrite);
 			} elseif ($overwrite || ! isset($target->{$segment})) {
-				$target->{$segment} = $value;
+				$target->{$segment} = self::value( $value );
 			}
 		} else {
 			$target = [];
 			if ($segments) {
-				static::data_set($target[$segment], $segments, $value, $overwrite);
+				static::data_set($target[$segment], $segments, self::value( $value ), $overwrite);
 			} elseif ($overwrite) {
-				$target[$segment] = $value;
+				$target[$segment] = self::value( $value );
 			}
 		}
 		return $target;
