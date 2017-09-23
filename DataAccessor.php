@@ -204,4 +204,8 @@ class DataAccessor
 		}
 		return $results;
 	}
+
+	public function serialize() {
+		return serialize($this->target);
+	}
 }
